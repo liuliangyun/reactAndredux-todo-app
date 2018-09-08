@@ -3,7 +3,7 @@ import { FilterTypes } from '../constants'
 
 const initState = FilterTypes.ALL
 
-const reducer = (state = initState, action) => {
+export default (state = initState, action) => {
     switch (action.type) {
         case SET_FILTER:
             return action.filter
@@ -11,5 +11,3 @@ const reducer = (state = initState, action) => {
             return state
     }
 }
-
-export default reducer

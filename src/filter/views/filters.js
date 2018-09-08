@@ -3,7 +3,7 @@ import { FilterTypes } from '../../constants'
 import Link from './link'
 import './style.css'
 
-export const Filters = () => {
+const Filters = () => {
     return (
         <p className='filters'>
             <Link filter={FilterTypes.ALL}>{FilterTypes.ALL}</Link>
@@ -12,3 +12,5 @@ export const Filters = () => {
         </p>
     )
 }
+
+export default Filters

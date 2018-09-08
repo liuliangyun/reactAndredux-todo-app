@@ -4,6 +4,13 @@ import { addTodo } from '../actions'
 
 class AddTodo extends Component {
 
+    constructor(props, context) {
+        super(props, context);
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.refInput = this.refInput.bind(this);
+    }
+
     refInput(node) {     //参数node就是input元素的真实DOM        
         this.input = node
     }
@@ -12,7 +19,7 @@ class AddTodo extends Component {
         e.preventDefault()     //取消浏览器的默认提交后的跳转行为
 
         const input = this.input
-        if (!input.alue.trim()) { //如果输入框为空白，则忽略
+        if (!input.value.trim()) { //如果输入框为空白，则忽略
             return;
         }
         this.props.addTodo(input.value) //否则调用添加todo函数，并将输入框置空
@@ -24,8 +31,8 @@ class AddTodo extends Component {
     render() {
         return (
             <div className='add-todo'>
-                <form onSubmit={() => this.onSubmit}>
-                    <input className='new-todo' ref={() => this.refInput} />
+                <form onSubmit={this.onSubmit}>
+                    <input className='new-todo' ref={this.refInput} />
                     <button className='add-btn' type='submit'>
                         添加
                     </button>
@@ -35,12 +42,13 @@ class AddTodo extends Component {
     }
 }
 
-const mapStateToProps = () => ({})
 
-const mapDispatchToProps = (dispatch) => ({
-    addTodo: (text) => {
-        dispatch(addTodo(text))
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTodo: (text) => {
+            dispatch(addTodo(text))
+        }
     }
-})
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
+export default connect(null, mapDispatchToProps)(AddTodo)

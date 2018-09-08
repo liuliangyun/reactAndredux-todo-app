@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {FilterTypes} from '../../constants'
+import { connect } from 'react-redux'
+import { FilterTypes } from '../../constants'
 import TodoItem from './todo-item'
 import { toggleTodo, removeTodo } from '../actions';
 
@@ -25,28 +25,30 @@ const TodoList = ({ todos, toggleTodo, removeTodo }) => {
 
 const selectVisibleTodos = (todos, filter) => {
     switch (filter) {
-        case FilterTypes.All:
-            return todos
         case FilterTypes.COMPLETED:
             return todos.filter(item => item.completed)
         case FilterTypes.UNCOMPLETED:
             return todos.filter(item => !item.completed)
         default:
-            throw new Error('unsupported filter')
+            return todos
     }
 }
 
-const mapStateToProps = (state) => ({
-    todos: selectVisibleTodos(state.todos, state.filter)
-})
+const mapStateToProps = (state) => {
+    return {
+        todos: selectVisibleTodos(state.todos, state.filter)
+    };
+}
 
-const mapDispatchToProps = (dispatch) => ({
-    toggleTodo:(id) => {
-        dispatch(toggleTodo(id))
-    },
-    removeTodo:(id) => {
-        dispatch(removeTodo(id))
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleTodo: (id) => {
+            dispatch(toggleTodo(id))
+        },
+        removeTodo: (id) => {
+            dispatch(removeTodo(id))
+        }
     }
-})
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

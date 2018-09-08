@@ -19,7 +19,7 @@ const reducer = (state = initState, action) => {
                 return todoItem
             })
         case REMOVE_TODO:
-            return state.map(todoItem => {
+            return state.filter(todoItem => {
                 return (todoItem.id !== action.id)
             })
         default:
